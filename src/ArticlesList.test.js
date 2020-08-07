@@ -20,27 +20,28 @@ afterEach(() => {
   container = null;
 });
 
-describe('Show More button', () => {
-  test('Shows next 5 articles when clicking', () => {
+describe('ArticlesList', () => {
+  test('Shows first 5 articles and displays source and title of each', () => {
     const fakeResults = testData;
 
     act(() => {
-      ReactDOM.render(<App />, container)
+      ReactDOM.render(<ArticlesList limitTo={5} source="All" totalResults={fakeResults.totalResults} articles={fakeResults.articles} />, container)
     });
 
-    const button = document.querySelector('button');
+    //screen.debug()
     const listItems = document.querySelectorAll('li')
-
     expect(listItems).toHaveLength(5)
+    
 
-    // Test click of show more button
-     act(() => {
-      button.dispatchEvent(new MouseEvent('click', {bubbles: true}));
+    listItems.forEach((item, index) => {
+
+      const { getByText, queryByText } = within(item)
+      const { title, source } = fakeResults.articles[index]
+      expect(getByText(title)).toBeInTheDocument()
+      expect(getByText(source.name)).toBeInTheDocument()
     });
-
-    // check message and number of list items
-    const listItems2 = document.querySelectorAll('li')
-    expect(listItems2).toHaveLength(10)
 
   });
-});
+})
+
+
