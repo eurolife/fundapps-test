@@ -4,8 +4,8 @@ function Filter(props) {
 
   return (
     <div>
-      <label htmlFor="article-filter">Choose</label>
-      <select id="article-filter" className="filter" value={props.source} onChange={props.onFilterChange}>
+      <select className="filter" value="" onChange={props.onFilterChange}>
+        <option disabled value="">Filter by Source</option>
         <option value="All">Show all</option>
       { props.sourceList.map((val, idx) => 
         <option key={`opt${idx}`} value={val.source.name}>{val.source.name}</option>

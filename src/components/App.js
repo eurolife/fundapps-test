@@ -5,6 +5,7 @@ import ArticlesList from './ArticlesList';
 import Message from './Message';
 import Button from './Button';
 import Filter from './Filter';
+import newsapi from '../api/newsapi';
 
 class App extends React.Component {
  
@@ -16,6 +17,18 @@ class App extends React.Component {
     limitTo: 5,
     source: 'All',
     sourceList: [],
+  }
+  getArticles = async () => {
+    const response = await newsapi.get('/top-headlines', {
+      params: { country: 'gb' },
+    });
+
+    this.setState({ 
+      articles: response.data.articles,
+      filteredArticles: response.data.articles,
+      totalResults: response.data.totalResults,
+      sourceList: this.setSourceList(response.data.articles) 
+    })
   }
   onLoadMore = () => {
     this.setState({
@@ -46,12 +59,7 @@ class App extends React.Component {
     })
   }
   componentDidMount() {
-    this.setState({
-      articles: testData.articles,
-      filteredArticles: testData.articles,
-      totalResults: testData.totalResults,
-      sourceList: this.setSourceList(testData.articles)
-    })
+    this.getArticles();
 
   }
 
