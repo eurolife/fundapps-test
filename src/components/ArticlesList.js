@@ -8,7 +8,7 @@ const NewsList = (props) => {
     <div>
       {props.totalResults ? 
       <div>
-       <h1 className="text-pinkish text-2xl font-bold border-b-2 border-pinkish inline-block">News</h1>
+       <h1 className="text-pinkish text-2xl font-bold border-b-2 border-pinkish inline-block mt-4 md:mt-0">News</h1>
         <ul className="mt-8">
           {
             props.articles.slice(0, props.limitTo).map((article,i) =>   (

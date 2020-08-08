@@ -32,10 +32,8 @@ class App extends React.Component {
 
     } finally {
       if(ok) {
-
         this.setData(response.data)
         //this.setData(testData)
-        console.log(response.data.articles)
       }
      
     }
@@ -115,7 +113,7 @@ class App extends React.Component {
       )
     }
     return (
-      <div>
+      <div className="bg-grey-100 h-screen md:h-auto">
         <Message message="I heard the news today oh boy!"/>
         <Spinner />
       </div>
@@ -126,7 +124,7 @@ class App extends React.Component {
   render() {
 
     return (
-      <div className="bg-gray-100 md:bg-white h-screen w-full flex justify-center md:h-auto container">
+      <div className="bg-gray-100 md:bg-white h-full flex justify-center md:h-auto container">
         <div className="bg-gray-100 p-4 mt-4 sm:pb-8 sm:w-3/4 lg:w-1/2 xl:w-1/2">
           {this.renderContent()}
         </div>

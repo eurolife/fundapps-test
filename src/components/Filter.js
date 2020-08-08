@@ -10,7 +10,7 @@ function Filter(props) {
   }
 
   return (
-    <div className="text-right">
+    <div className="md:text-right">
       <select className="filter rounded appearance-none bg-transparent pr-8 text-gray-800 text-sm border-2 border-gray-600 p-1" defaultValue="" onChange={props.onFilterChange} style={style}>
         <option disabled value="">Filter by Source</option>
         <option value="All">Show all</option>
