@@ -1,11 +1,7 @@
 import React from 'react';
-import ReactDOM, { unmountComponentAtNode } from 'react-dom';
-import { render, getAllByTestId, screen, queryAllByTestId, getAllByRole, within } from '@testing-library/react';
+import ReactDOM from 'react-dom';
 import { act } from "react-dom/test-utils";
-import App from './components/App';
-import axios from 'axios';
-import ArticlesList from './components/ArticlesList';
-import {testData} from './data/testData';
+import App from '../components/App';
 
 let container = null;
 beforeEach(() => {
@@ -21,8 +17,7 @@ afterEach(() => {
 });
 
 describe('Show More button', () => {
-  test('Shows next 5 articles when clicking', () => {
-    const fakeResults = testData;
+  test('Shows more articles when clicking',  () => {
 
     act(() => {
       ReactDOM.render(<App />, container)
@@ -37,10 +32,11 @@ describe('Show More button', () => {
      act(() => {
       button.dispatchEvent(new MouseEvent('click', {bubbles: true}));
     });
-
-    // check message and number of list items
+    
+    // check number of list items
     const listItems2 = document.querySelectorAll('li')
-    expect(listItems2).toHaveLength(10)
+    expect(listItems2.length > 5);
 
   });
 });
+

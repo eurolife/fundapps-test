@@ -1,12 +1,10 @@
 import React from 'react';
-import ReactDOM, { unmountComponentAtNode } from 'react-dom';
-import { render, getAllByTestId, screen, queryAllByTestId, getAllByRole, within } from '@testing-library/react';
+import ReactDOM from 'react-dom';
+import { within } from '@testing-library/react';
 import { act } from "react-dom/test-utils";
-import App from './components/App';
-import axios from 'axios';
-import ArticlesList from './components/ArticlesList';
-import {testData} from './data/testData';
-
+import ArticlesList from '../components/ArticlesList';
+import {testData} from '../data/testData';
+ 
 let container = null;
 beforeEach(() => {
   // setup a DOM element as a render target
@@ -21,10 +19,16 @@ afterEach(() => {
 });
 
 describe('ArticlesList', () => {
-  test('Shows first 5 articles and displays source and title of each', () => {
+  test('Shows first 5 articles and displays source and title of each', async () => {
     const fakeResults = testData;
+    
+    jest.spyOn(global, "fetch").mockImplementation(() =>
+      Promise.resolve({
+        json: () => Promise.resolve(fakeResults)
+      })
+    );
 
-    act(() => {
+    await act(async () => {
       ReactDOM.render(<ArticlesList limitTo={5} source="All" totalResults={fakeResults.totalResults} articles={fakeResults.articles} />, container)
     });
 

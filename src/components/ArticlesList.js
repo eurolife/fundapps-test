@@ -13,7 +13,7 @@ const NewsList = (props) => {
           {
             props.articles.slice(0, props.limitTo).map((article,i) =>   (
               props.source === 'All' || article.source.name === props.source ?
-                <li role="listitem" data-testid="list-item" key={`article${i}`}>{article.title} <span>{article.source.name}</span></li> 
+                <li key={`article${i}`}>{article.title} <span className="article-source">{article.source.name}</span></li> 
                 : ''
               ))
               

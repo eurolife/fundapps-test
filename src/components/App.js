@@ -30,7 +30,6 @@ class App extends React.Component {
   }
   filterList = (val) => {
     let articles = this.state.articles;
-    console.log(val)
     const newList = articles.filter((item) => {
       
       return val === item.source.name || val === 'All';
