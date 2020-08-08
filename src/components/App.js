@@ -1,10 +1,11 @@
 import React from 'react';
-import './App.css';
+import '../App.css';
 import {testData} from '../data/testData';
 import ArticlesList from './ArticlesList';
 import Message from './Message';
 import Button from './Button';
 import Filter from './Filter';
+import Spinner from './Spinner';
 import newsapi from '../api/newsapi';
 
 class App extends React.Component {
@@ -31,17 +32,22 @@ class App extends React.Component {
 
     } finally {
       if(ok) {
-        this.setState({ 
-          articles: response.data.articles,
-          filteredArticles: response.data.articles,
-          totalResults: response.data.totalResults,
-          sourceList: this.setSourceList(response.data.articles),
-          errorMessage: response.message,
-        })
+
+        this.setData(response.data)
+        //this.setData(testData)
+        console.log(response.data.articles)
       }
      
     }
 
+  }
+  setData = (data) => {
+    this.setState({ 
+      articles: data.articles,
+      filteredArticles: data.articles,
+      totalResults: data.totalResults,
+      sourceList: this.setSourceList(data.articles),
+    })
   }
   onLoadMore = () => {
     this.setState({
@@ -73,6 +79,7 @@ class App extends React.Component {
   }
   componentDidMount() {
     this.getArticles();
+    //this.setData(testData); 
 
   }
 
@@ -99,21 +106,32 @@ class App extends React.Component {
            />
 
           { this.state.limitTo < this.state.filteredArticles.length &&
+          <div className="mt-8">
             <Button onButtonClick={this.onLoadMore}/>
+          </div>
           }
         </div>
         
       )
     }
-    return <Message message="Loading..."/>
+    return (
+      <div>
+        <Message message="I heard the news today oh boy!"/>
+        <Spinner />
+      </div>
+    
+    )
   }
 
   render() {
 
     return (
-      <div>
-        {this.renderContent()}
+      <div className="bg-gray-100 md:bg-white h-screen w-full flex justify-center md:h-auto container">
+        <div className="bg-gray-100 p-4 mt-4 sm:pb-8 sm:w-3/4 lg:w-1/2 xl:w-1/2">
+          {this.renderContent()}
+        </div>
       </div>
+      
       );
   }
 }
