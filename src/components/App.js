@@ -19,16 +19,29 @@ class App extends React.Component {
     sourceList: [],
   }
   getArticles = async () => {
-    const response = await newsapi.get('/top-headlines', {
-      params: { country: 'gb' },
-    });
+    let response = {};
+    let ok = true;
+    try {
+      response = await newsapi.get('/top-headlines', {
+        params: { country: 'gb' },
+      });
+    } catch(err) {
+      ok = false;
+      this.setState({ errorMessage: 'Oops! There was an error, please try again.'});
 
-    this.setState({ 
-      articles: response.data.articles,
-      filteredArticles: response.data.articles,
-      totalResults: response.data.totalResults,
-      sourceList: this.setSourceList(response.data.articles) 
-    })
+    } finally {
+      if(ok) {
+        this.setState({ 
+          articles: response.data.articles,
+          filteredArticles: response.data.articles,
+          totalResults: response.data.totalResults,
+          sourceList: this.setSourceList(response.data.articles),
+          errorMessage: response.message,
+        })
+      }
+     
+    }
+
   }
   onLoadMore = () => {
     this.setState({
