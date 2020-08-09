@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import Message from './Message';
 import { formatDate } from '../helpers';
 
@@ -13,9 +13,9 @@ const NewsList = (props) => {
           {
             props.articles.slice(0, props.limitTo).map((article,i) =>   (
               props.source === 'All' || article.source.name === props.source ?
-                <li key={`article${i}`} className="border-b-2 border-gray-400 pb-3">
+                <li key={`article${i}`} className="flex flex-wrap border-b-2 border-gray-400 pb-3">
                   <div className="mt-3">
-                    <a className="font-bold text-lg hover:text-pinkish leading-tight" href={article.url} target="_blank" rel="noopener noreferrer">{article.title}</a>
+                    <a className="font-bold text-lg hover:text-pinkish leading-tight transition-colors duration-300" href={article.url} target="_blank" rel="noopener noreferrer">{article.title}</a>
                   </div> 
                   <div className="mt-2 flex justify-start">
                     <span className="text-xs mr-4">{formatDate(article.publishedAt)}</span>
@@ -31,7 +31,7 @@ const NewsList = (props) => {
         
       </div>
       :
-      <Message message="There are no articles right now."/>  
+      <Message message="There is no news right now. No news is good news."/>  
         
       }
     </div>

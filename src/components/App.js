@@ -29,6 +29,7 @@ class App extends React.Component {
       });
     } catch(err) {
       ok = false;
+      console.log(err)
       this.setState({ errorMessage: 'Oops! There was an error, please try again.'});
 
     } finally {
@@ -129,7 +130,7 @@ class App extends React.Component {
 
     return (
       <div className="bg-gray-100 md:bg-white h-full flex justify-center md:h-auto container">
-        <div className="bg-gray-100 p-4 mt-4 sm:pb-8 sm:w-3/4 lg:w-1/2 xl:w-1/2">
+        <div className="bg-gray-100 p-4 mt-4 pb-8 md:pb-4 sm:w-3/4 lg:w-1/2 xl:w-1/2">
           {this.renderContent()}
         </div>
       </div>
