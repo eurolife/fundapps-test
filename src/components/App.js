@@ -1,5 +1,5 @@
 import React from 'react';
-import '../App.css';
+import './App.css';
 import {testData} from '../data/testData';
 import ArticlesList from './ArticlesList';
 import Message from './Message';
@@ -7,6 +7,7 @@ import Button from './Button';
 import Filter from './Filter';
 import Spinner from './Spinner';
 import newsapi from '../api/newsapi';
+import {compare} from '../helpers';
 
 class App extends React.Component {
  
@@ -33,7 +34,6 @@ class App extends React.Component {
     } finally {
       if(ok) {
         this.setData(response.data)
-        //this.setData(testData)
       }
      
     }
@@ -70,13 +70,17 @@ class App extends React.Component {
     })
   }
   setSourceList(articles) {
-    return Array.from(new Set(articles.map(a => a.source.name)))
+    let list = Array.from(new Set(articles.map(a => a.source.name)))
     .map(s => {
       return articles.find(a => a.source.name === s)
     })
+    // sort it alphabetically
+    return list.sort((a, b) => compare(a.source.name, b.source.name));
   }
   componentDidMount() {
     this.getArticles();
+
+    // Use this to run tests
     //this.setData(testData); 
 
   }

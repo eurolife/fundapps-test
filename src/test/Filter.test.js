@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { fireEvent } from '@testing-library/react';
 import { act } from "react-dom/test-utils";
 import App from '../components/App';
-//import testData from '../data/testData';
 
 let container = null;
 beforeEach(() => {
@@ -20,8 +19,6 @@ afterEach(() => {
 
 describe('Filter', () => {
   test('Filter by article source', () => {
-
-    //const fakeResults = testData;
 
     act(() => {
       ReactDOM.render(<App />, container)

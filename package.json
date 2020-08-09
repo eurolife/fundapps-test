@@ -15,8 +15,8 @@
     "tailwindcss": "^1.6.2"
   },
   "scripts": {
-    "build:tailwind": "tailwind build src/tailwind.css -o src/App.css",
-    "watch:tailwind": "chokidar 'src/tailwind.css' --ignore src/App.css -c 'npm run build:tailwind'",
+    "build:tailwind": "tailwind build src/tailwind.css -o src/components/App.css",
+    "watch:tailwind": "chokidar 'src/tailwind.css' --ignore src/components/App.css -c 'npm run build:tailwind'",
     "start": "npm-run-all build:tailwind --parallel watch:tailwind start:react",
     "start:react": "react-scripts start",
     "prebuild": "run-s build:tailwind",
